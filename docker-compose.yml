@@ -1,0 +1,24 @@
+
+services:
+  # PostgreSQL Veritabanı Servisi
+  postgres:
+    image: postgres:16-alpine
+    container_name: smartqueue_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: SmartQueueDb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Redis (Distributed Lock & Cache Servisi)
+  redis:
+    image: redis:7-alpine
+    container_name: smartqueue_redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:
